@@ -32,16 +32,19 @@ function smallestCommons(arr) {
                if (oneNumber[i] == totalArr[j] )
                {                
                 totalArr.splice(j, 1);  // remover from total
+                break;
                }
 
             }
         }
-        console.log("after : one " + oneNumber );
+                
+       
+        // now add all that is in one to total
+        for (var i = 0; i < oneNumber.length; i++) {
+            totalArr.push(oneNumber[i]); 
+        }
         console.log("after : total " + totalArr );
         console.log("----------------------");
-        // now add all that is in one to total
-        
-
 
         // need to check what was added then insert it to my array
         // if (totalArr.length == 0) {
@@ -88,8 +91,12 @@ function smallestCommons(arr) {
         concatArr(eachNumArr,totalArr);
     }
 
-
-    return arr;
+    var res=1;
+    for (var i = 0; i < totalArr.length; i++) {
+        res = res*totalArr[i]; 
+    }
+    console.log("RES=" +res );
+    return res;
 }
 
 
