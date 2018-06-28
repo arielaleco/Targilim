@@ -84,9 +84,9 @@ function smallestCommons(arr) {
 
     var totalArr = [];
     //var eachNumArr =[];
-    for (var i = toNum; i > fromNum; i--) {
+    for (var i = toNum; i >= fromNum; i--) {
 
-        eachNumArr= getPrimeFactors(i);
+        var eachNumArr= getPrimeFactors(i);
            
         concatArr(eachNumArr,totalArr);
     }
@@ -100,4 +100,4 @@ function smallestCommons(arr) {
 }
 
 
-smallestCommons([2, 10]);
+smallestCommons([23, 18]);
