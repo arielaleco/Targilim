@@ -236,4 +236,87 @@ function Make_a_Person() {
 
     //console.log(bob.getFullName());
 
+};
+
+function Arguments_Optional() {
+
+
+    function addTogether(arg1, arg2) {
+
+
+        if ((typeof arg1 == 'number') && (typeof arg2 == 'number')) {
+            return arg1 + arg2;
+        }
+
+        // if ((arg1 !== undefined) && (arg2 !== undefined)) {
+
+        else if ((typeof arg1 == 'number') && (arg2 == undefined)) {
+
+            var newfunction = function (b) {
+                if (typeof b == 'number') {
+                    return arg1 + b;
+                }
+                else {
+                    return undefined;
+                }
+
+            };
+
+
+            return newfunction;
+        }
+        else {
+            return undefined;
+        }
+
+    }
+    var res;
+    //res = addTogether(2, 3);
+    res = addTogether(2)([3]);
+    console.log(res);
+
+
+};
+
+
+function Dropit() {
+    // function dropElements(arr, func) {
+    //     // Drop them elements.
+
+    //     var i = 0;
+        
+    //     var deleteUntil=0;
+    //     var x;
+    //     x = func(i+1);
+    //     while ((!func(i+1) && (i < arr.length))) {
+    //         x = func(i+1);
+    //         deleteUntil=i+1;
+    //         //arr.splice(0, 1);
+    //         i++;
+    //     }
+    //     for(var i=deleteUntil-1; i>=0;i--)
+    //     {
+    //        arr.splice(i, 1); 
+    //     }
+       
+
+    //     return arr;
+    // }
+    function dropElements(arr, func) {
+        var newArr = [];
+         for (var i in arr) {
+           if (func(arr[i])) {
+             newArr = arr.slice(i);
+             break;
+           } 
+         }
+         if (newArr.length === arr.length) {
+           newArr.filter(func);
+         }
+         return newArr;
+       }
+
+    var myArr = dropElements([0, 1, 0, 1], function(n) {return n === 1;}) 
+    console.log(myArr);
+
 }
