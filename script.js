@@ -284,7 +284,7 @@ function Dropit() {
     //     // Drop them elements.
 
     //     var i = 0;
-        
+
     //     var deleteUntil=0;
     //     var x;
     //     x = func(i+1);
@@ -298,25 +298,253 @@ function Dropit() {
     //     {
     //        arr.splice(i, 1); 
     //     }
-       
+
 
     //     return arr;
     // }
     function dropElements(arr, func) {
         var newArr = [];
-         for (var i in arr) {
-           if (func(arr[i])) {
-             newArr = arr.slice(i);
-             break;
-           } 
-         }
-         if (newArr.length === arr.length) {
-           newArr.filter(func);
-         }
-         return newArr;
-       }
+        for (var i in arr) {
+            if (func(arr[i])) {
+                newArr = arr.slice(i);
+                break;
+            }
+        }
+        if (newArr.length === arr.length) {
+            newArr.filter(func);
+        }
+        return newArr;
+    }
 
-    var myArr = dropElements([0, 1, 0, 1], function(n) {return n === 1;}) 
+
+
+
+    var myArr = dropElements([0, 1, 0, 1], function (n) { return n === 1; })
     console.log(myArr);
 
+}
+
+function FindTheDifference1() {
+    var resArray = [];
+
+    function checkwithArray(addThisArray) {
+        var workArray = [];   // create array with only one occurance 
+        for (var i = 0; i < addThisArray.length; i++) {
+            if (workArray.indexOf(addThisArray[i]) == -1) { workArray.push(addThisArray[i]) }
+
+        }
+
+        for (var i = 0; i < workArray.length; i++) {
+            var x = resArray.indexOf(workArray[i]);
+            if (x == -1) { resArray.push(workArray[i]) }
+            else // it exist
+            {
+                resArray.splice(x, 1);
+            }
+
+        }
+
+        // now ompare with res array
+
+    }
+
+    function sym(args) {
+
+        var args = [];
+        for (var i = 0; i < arguments.length; i++) {
+            args.push(arguments[i]);
+        }
+
+
+        for (var j = 0; j < arguments.length; j++) {
+            var anArray = arguments[j];
+
+            checkwithArray(anArray);
+            console.log(anArray);
+        }
+
+        resArray.sort();
+        return resArray;
+    }
+    console.log("result is:" + sym([1, 2, 3, 3], [5, 2, 1, 4]));
+
+}
+
+function FindTheDifference() {
+    function sym(args) {
+        var args = Array.prototype.slice.call(arguments);
+        // now I have one array that contains all the numbers
+
+        function symDiff(arrayOne, arrayTwo) {
+            var result = [];
+
+            arrayOne.forEach(function (item) {
+                if (arrayTwo.indexOf(item) < 0 && result.indexOf(item) < 0) {
+                    result.push(item);
+                }
+            });
+
+            arrayTwo.forEach(function (item) {
+                if (arrayOne.indexOf(item) < 0 && result.indexOf(item) < 0) {
+                    result.push(item);
+                }
+            });
+
+            return result;
+        }
+
+        return args.reduce(symDiff);
+    }
+
+    console.log("result is:" + sym([1, 2, 3], [5, 2, 1, 4]));
+
+
+}
+
+function InventoryUpdateClick() {
+
+    function updateInventory(arr1, arr2) {
+        // All inventory must be accounted for or you're fired!
+        arr2.forEach(function (item) {
+            // look for them in orld array - if exist update - in not add
+            var bFound = false;
+            for (var i = 0; i < arr1.length; i++) {
+                if (arr1[i][1] == item[1]) {
+                    arr1[i][0] = arr1[i][0] + item[0];
+                    bFound = true;
+                }
+            }
+            if (!bFound) {
+                arr1.push(item);
+            }
+
+
+            //if (arr1.indexOf(item[0]))
+        });
+
+        // now sort the result !
+        arr1.sort(sortfunction);
+        function sortfunction(a, b) {
+            if (a[1] == b[1]) {
+                return 0;
+            }
+            else {
+                return (a[1] < b[1]) ? -1 : 1;
+            }
+        }
+
+        console.log(arr1);
+
+
+
+        return arr1;
+    }
+
+
+    var curInv = [
+        [21, "Bowling Ball"],
+        [2, "Dirty Sock"],
+        [1, "Hair Pin"],
+        [5, "Microphone"]
+    ];
+
+    var newInv = [
+        [2, "Hair Pin"],
+        [3, "Half-Eaten Apple"],
+        [67, "Bowling Ball"],
+        [7, "Toothpaste"]
+    ];
+
+    updateInventory(curInv, newInv);
+
+}
+
+function NoRepeatsPlease() {
+
+    function permAlone(str) {
+
+        // create all the words I can
+        var resArr = [];
+        for (var i = 0; i < str.length; i++) {
+            console.log("working in " + str[i]);
+            resArr = introduceElement(str[i], resArr)
+        }
+
+        function introduceElement(element, resArr) {
+            console.log("in introduceElement : " + element + " " + resArr);
+            var i = 0;
+            var bNeedToWork = true;
+            while (bNeedToWork) {
+
+                resArr.splice(i, 0, element);
+                console.log(resArr);
+                i++;
+                if (i >= resArr.length) { bNeedToWork = false; }
+
+            }
+            // for(var i=0;i<resArr.length;i++)
+            // {
+
+            //   //  resArr = introduceElement(str[i], resArr)
+            // }
+            // resArr.push(element);
+            console.log(resArr);
+            return resArr;
+        }
+
+
+
+        return str;
+    }
+
+    permAlone('abc');
+
+}
+
+function TypedArrays() {
+
+    var buffer;
+    var i32View;
+
+    var buffersize = 8;
+    var buffer = new ArrayBuffer(64);
+
+    // buffer = new Float64Array(64);
+    //buffer = new ArrayBuffer(buffersize);
+    console.log(buffer.byteLength);
+    var i32View = new Float32Array(16);
+
+}
+
+function StackWorks() {
+    var homeworkStack = ["BIO12", "HIS80", "MAT122", "PSY44"];
+
+    homeworkStack.pop();
+    homeworkStack.push("CS50");
+
+
+    // Only change code below this line
+
+}
+
+function CreateStackClass() {
+    function Stack() {
+        collection = [];
+        this.print = function () {
+            console.log(collection);
+        };
+        // Only change code below this line
+
+        this.push = function (element) {
+            collection.push(element);
+        };
+        this.pop = function () {
+            collection.pop();
+        };
+
+        this.peek = function () {
+            result(collection[0]);
+        };
+        // Only change code above this line
+    }
 }
